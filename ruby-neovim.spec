@@ -11,6 +11,7 @@ License:	MIT
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	fc4441ed1758ffb76008f29e9cfbe774
+Patch0:		rubygems.patch
 URL:		https://github.com/alexgenco/neovim-ruby
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
@@ -24,6 +25,7 @@ BuildRequires:	ruby-rspec >= 3.0
 %endif
 Requires:	ruby-msgpack < 2
 Requires:	ruby-msgpack >= 1.0
+Requires:	ruby-rubygems
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -33,6 +35,7 @@ A Ruby client for Neovim.
 %prep
 %setup -q -n %{pkgname}-%{version}
 %{__sed} -i -e '1 s,#!.*ruby,#!%{__ruby},' bin/*
+%patch0 -p1
 
 %build
 # write .gemspec
